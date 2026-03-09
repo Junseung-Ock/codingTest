@@ -14,16 +14,23 @@ public class p012 {
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
         int[] arr = new int[N];
+        int[] answer = new int[N];
         for(int i=0; i<N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
         Stack<Integer> stack = new Stack<>();
-        int count = 0;
         for(int i=0; i<N; i++) {
-            stack.add(arr[i]);
-            if(!stack.isEmpty() && stack.peek() < arr[i]) {
-                sb.append(arr[i]);
+            while(!stack.isEmpty() && arr[stack.peek()]<arr[i]) {
+                answer[stack.pop()] = arr[i];
             }
+            stack.add(i);
         }
+        for(int i=0; i<N; i++) {
+            if(answer[i] == 0) {
+                answer[i] = -1;
+            }
+            sb.append(answer[i]+ " ");
+        }
+        System.out.println(sb);
     }
 }
