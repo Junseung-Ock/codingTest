@@ -15,26 +15,23 @@ public class p016 {
             int cur = Integer.parseInt(br.readLine());
             arr[i] = new Node(cur, i);
         }
-        Arrays.sort(arr);
+        Arrays.sort(arr, (Node a, Node b) -> Integer.compare(a.v, b.v));
+        int max = 0;
         for(int i=0; i<N; i++) {
-            d[i] = arr[i].idx - i;
+            if(max < arr[i].idx - i) {
+                max = arr[i].idx - i;
+            }
         }
-        Arrays.sort(d);
-        System.out.println(d[N-1]+1);
+        System.out.println(max+1);
     }
 
-    public static class Node implements Comparable<Node> {
+    public static class Node {
         int v;
         int idx;
 
         public Node(int v, int idx) {
             this.v = v;
             this.idx = idx;
-        }
-
-        @Override
-        public int compareTo(Node o) {
-            return Integer.compare(this.v, o.v);
         }
     }
 }
